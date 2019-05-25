@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The Ultimate Baseball Quiz</title>
+        <meta name="description" content="An interactive baseball quiz with score">
+        <link rel="stylesheet" type="text/css" 
+            href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous">
+        </script>
+        <script src="index.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1 class="page-title">The Ultimate Baseball Quiz</h1>           
+        </header>
+        <main>
+            <form class="quiz-form">
+                <fieldset class="">
+                    <legend class="question">Question number 1</legend>
+                    <input type="radio" id="choice1" class="answer" name="answer">
+                    <label for="choice1" class="answer-label">Choice 1</label><br>
+                    <input type="radio" id="choice2" class="answer" name="answer">
+                    <label for="choice2" class="answer-label">Choice 2</label><br>
+                    <input type="radio" id="choice3" class="answer" name="answer">
+                    <label for="choice3" class="answer-label">Choice 3</label><br>
+                    <input type="radio" id="choice4" class="answer" name="answer">
+                    <label for="choice4" class="answer-label">Choice 4</label><br>                        
+                </fieldset>
+                <button type="submit" class="quiz-submit">Next</button>
+            </form>
+            <div class="score">
+                <p>Correct: 0</p>
+                <p>Wrong: 0</p>
+                <p>Percent Correct: 0%</p>
+            </div>
+        </main>
+    </body>
+</html>
