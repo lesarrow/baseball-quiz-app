@@ -17,6 +17,11 @@
             <h1 class="page-title">The Ultimate Baseball Quiz</h1>           
         </header>
         <main>
+            <div class="quiz-start">
+                <p>Let's test your knowledge about baseball.</p>
+                <button type="button" class="start-button">Press to start the quiz</button>
+                <br><br>
+            </div>
             <form class="quiz-form">
                 <fieldset class="">
                     <legend class="question">Question number 1</legend>
@@ -29,12 +34,21 @@
                     <input type="radio" id="choice4" class="answer" name="answer">
                     <label for="choice4" class="answer-label">Choice 4</label><br>                        
                 </fieldset>
-                <button type="submit" class="quiz-submit">Next</button>
+                <button type="submit" class="quiz-submit">Lock in my answer</button>
             </form>
+            <div>
+                <p>Congratulations, you answered correctly!</p>
+                <p>Sorry you answered incorrectly. The correct answer to question number 1 was choice 1</p>
+                <button>OK</button>
+            </div>
             <div class="score">
                 <p>Correct: 0</p>
                 <p>Wrong: 0</p>
                 <p>Percent Correct: 0%</p>
+            </div>
+            <div>
+                <p>Thank you for taking the Ultimate Baseball Quiz. Your final score was 10 out of 10.</p>
+                <button type="button" class="start-button">Press to restart quiz</button>
             </div>
         </main>
     </body>
