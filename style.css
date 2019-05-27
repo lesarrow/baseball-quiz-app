@@ -3,14 +3,14 @@
 }
 
 
-/* body {
+ body {
     min-height: 1024px;
     display: block;
     position: relative;
+    font-weight: 600;
 }
 
-
- body::after {
+body::after {
     content: "";
     background-image: url("https://upload.wikimedia.org/wikipedia/commons/a/a0/Angel_Stadium_of_Anaheim.jpg");
     background-size: cover; 
@@ -24,4 +24,81 @@
     right: 0;
     position: absolute;
     z-index: -1;   
-} */
+} 
+
+.page-title {
+    text-align: center;
+    font-size: 36px;
+    padding-top: 20px;
+
+}
+
+main {
+    margin: 0 5px 0;
+}
+
+.quiz-form {
+    border: 2px solid black;
+    margin-top: 20px;
+    padding: 5px 15px;
+    font-size: 24px;
+    min-height: 250px;
+    position: relative;
+}
+
+.question {
+    padding: 5px 0 15px;
+}
+
+.quiz-form label {
+    font-size: 20px;
+}
+
+.button-container {
+    width:100%;
+    text-align: center;
+    padding: 15px 0;
+    position: absolute;
+    bottom: 0;
+}
+
+.quiz-submit {
+    font-size: 18px;
+}
+
+.score {
+    margin: 20px auto 0;
+    list-style: none;
+    width: 325px;
+    font-size: 28px;
+    display: none;
+}
+
+.score-labels {
+    display: inline-block;
+    text-align: right;
+}
+
+.score-values {
+    display: inline-block;
+    padding-left: 10px;
+}
+
+.quiz-start, .quiz-end {
+    padding: 70px 0 20px 0;
+    text-align:center;
+}
+
+.question-block {
+    display:none;
+}
+
+.quiz-end {
+    display: none;
+}
+
+.final-score {
+    display: block;
+}
+
+
