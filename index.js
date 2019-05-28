@@ -88,6 +88,16 @@ class Question {
 
         return null;
     }
+
+    getCorrectAnswer() {
+
+        for (let i=0; i<this.answers.length; i++) {
+            if (this.answers[i].getCorrect())
+                return this.answers[i].getText();
+        }
+
+        return "Error - no correct answer found";
+    }
 }
 
 
@@ -215,7 +225,7 @@ function processQuestionResult(question, score) {
     else {
         score.addWrong();
         correct = false;
-        correctOrWrongMsg = "Sorry you answered incorrectly."
+        correctOrWrongMsg = "Sorry you answered incorrectly. The correct answer was: " + question.getCorrectAnswer();
     } 
 
     $('.correctOrWrongMsg').text(correctOrWrongMsg);
