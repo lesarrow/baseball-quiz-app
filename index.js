@@ -193,8 +193,11 @@ function buildQuestionSet() {
 
 function processQuestionResult(question, score) {
 
-    let answerNum = question.getCorrectAnswerIndex();
     let checkedNum;
+    let correct;
+    let correctOrWrongMsg;
+
+    let answerNum = question.getCorrectAnswerIndex();
 
     if (answerNum === null)
         console.log("Error in processQuestionResult. getCorrectAnswerIndex returned null");
@@ -206,10 +209,17 @@ function processQuestionResult(question, score) {
 
     if (answerNum === checkedNum) {
         score.addCorrect();
+        correct = true;
+        correctOrWrongMsg = "Congratulations, you answered correctly!";
     }
     else {
         score.addWrong();
-    }
+        correct = false;
+        correctOrWrongMsg = "Sorry you answered incorrectly."
+    } 
+
+    $('.correctOrWrongMsg').text(correctOrWrongMsg);
+    $('.correctOrWrong').show();
 
 }
 
@@ -255,38 +265,92 @@ function renderFinal(score) {
     $('.quiz-submit').text("Press to restart quiz");
 }
 
+
+function handleCorrectWrong(questionStatus, score, questionList) {
+
+    $('.correctOrWrongBtn').click(e => {
+
+        /* If there is another question, render it */
+
+        if (questionStatus.questionNum <= 10)
+            renderNextQuestion(questionList[questionStatus.questionNum - 1]);
+
+        /* If at the end of the quiz, show the final score */
+
+        if (questionStatus.questionNum > 10)
+            renderFinal(score);
+
+        $('.correctOrWrong').hide();
+
+    });
+
+}
+
+function handleSubmitButton(questionStatus, score, questionList) {
+
+    $('.quiz-submit').click(e => {
+
+        e.preventDefault();
+
+        
+        /* If starting the quiz first time, increase the
+            question number, render the first question, and show the score */
+
+            if (questionStatus.questionNum == 0) {
+                questionStatus.questionNum = 1;
+                renderNextQuestion(questionList[questionStatus.questionNum-1]);
+            }        
+        
+        /* If answering a question, process the question result  */
+
+            else if ((questionStatus.questionNum > 0) && (questionStatus.questionNum <= 10)) {
+
+                questionStatus.questionNum++;
+
+                /* Unexpected code alert - I use index questionStatus.questionNum-2 rather than
+                    -1 this time because I incremented the question number above. I chose to 
+                    increment the question number here instead of in processQuestionResult 
+                    because I thought it was more intuitive. */
+
+                processQuestionResult(questionList[questionStatus.questionNum-2], score);
+            }
+
+
+        /* If at the final score dialog, set the question number back to 1,
+            reset the score, and render the first question and the score */
+
+            else if (questionStatus.questionNum > 10) {
+                score.reset();
+                questionStatus.questionNum = 1;
+                renderNextQuestion(questionList[questionStatus.questionNum-1], score);
+            }
+
+            renderScore(score);
+
+    });
+
+}
+
 function handleQuizApp() {
    
     /* Initialize the Score Object */
     let score = new Score();
 
     /* Initialize the question number */
-    let questionNum = 0;
+    let questionStatus = {
+        questionNum: 0
+    };
 
     /* Build the question and answer objects */
     let questionList = buildQuestionSet();
 
     /* Handle the submit button */
-    $('.quiz-submit').click(e => {
-        e.preventDefault();
-        if ((questionNum >= 0) && (questionNum <= 10)) {
-            if (questionNum != 0)
-                processQuestionResult(questionList[questionNum-1], score);
-            questionNum++;
-            if (questionNum > 10)
-                renderFinal(score);
-            else {
-                renderNextQuestion(questionList[questionNum-1]);    
-                renderScore(score);
-            }
-        }
-        else {
-            questionNum = 1;
-            score.reset();
-            renderNextQuestion(questionList[questionNum-1]);
-            renderScore(score);
-        }
-    });    
+
+    handleSubmitButton(questionStatus, score, questionList);
+
+    /* Handle the Correct/Wrong Dialog */
+
+    handleCorrectWrong(questionStatus, score, questionList);
 }
 
 
